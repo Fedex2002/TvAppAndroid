@@ -68,7 +68,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("com.google.android.exoplayer:exoplayer-core:2.18.1")
-
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
     // ExoPlayer DASH support for MPEG-DASH
     implementation("com.google.android.exoplayer:exoplayer-dash:2.18.1")
 
