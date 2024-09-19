@@ -7,7 +7,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Fede APP TV"
+        android:label="IPTV App SandF"
         android:theme="@style/Theme.AppDeEjemplo">
 
         <!-- Configuración de la actividad principal -->
