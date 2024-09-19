@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:background="@android:color/black">
+
+    <!-- Menu layout with horizontal orientation for buttons -->
+    <LinearLayout
+        android:id="@+id/menuLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@android:color/darker_gray"
+        android:padding="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageButton
+            android:id="@+id/canal1Button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:src="@android:drawable/ic_menu_view"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:contentDescription="Canal 1" />
+
+        <ImageButton
+            android:id="@+id/canal2Button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:src="@android:drawable/ic_menu_view"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:contentDescription="Canal 2" />
+
+        <ImageButton
+            android:id="@+id/canal3Button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:src="@android:drawable/ic_menu_view"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:contentDescription="Canal 3" />
+
+    </LinearLayout>
+
+    <!-- WebView for streaming content -->
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="900dp"
+        android:layout_height="700dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:scrollbars="none" />
+</LinearLayout>
