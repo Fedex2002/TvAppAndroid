@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Estado cuando está enfocado -->
+    <item android:state_focused="true" android:drawable="@drawable/focus_background" />
+    <!-- Estado normal sin enfoque -->
+    <item android:drawable="@android:color/transparent" />
+</selector>

@@ -1,38 +1,33 @@
+<!-- activity_main.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
-    android:background="@android:color/darker_gray">
+    android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/canal1Button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:backgroundTint="@android:color/holo_blue_light"
-        android:src="@android:drawable/ic_menu_view"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:contentDescription="Canal 1" />
 
-    <ImageButton
-        android:id="@+id/canal2Button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:backgroundTint="@android:color/holo_orange_light"
-        android:src="@android:drawable/ic_menu_view"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:contentDescription="Canal 2" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <ImageButton
-        android:id="@+id/canal3Button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:src="@android:drawable/ic_menu_view"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:contentDescription="Canal 3" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/prevPageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anterior" />
+
+        <Button
+            android:id="@+id/nextPageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Siguiente" />
+    </LinearLayout>
 </LinearLayout>

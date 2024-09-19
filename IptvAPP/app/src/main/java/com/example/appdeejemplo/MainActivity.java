@@ -2,57 +2,65 @@
 package com.example.appdeejemplo;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageButton;
+import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.FragmentActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
     private WebView webView;
     private String currentUrl;
-    private boolean isInWebView = false; // Bandera para saber si estamos en el reproductor
+    private boolean isInWebView = false;
+    private ViewPager2 viewPager;
+    private ChannelPagerAdapter adapter;
+    private int numPages = 2;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        // Restaurar la URL actual si se rota la pantalla
         if (savedInstanceState != null) {
             currentUrl = savedInstanceState.getString("currentUrl");
         }
 
-        showMenu(); // Mostrar el menú al iniciar
+        initializeViewPager();
 
-        // Si hay una URL guardada, cargarla automáticamente
         if (currentUrl != null) {
             loadChannel(currentUrl);
         }
     }
 
-    private void showMenu() {
-        setContentView(R.layout.activity_main); // Cambia al layout del menú
-        ImageButton canal1Button = findViewById(R.id.canal1Button);
-        ImageButton canal2Button = findViewById(R.id.canal2Button);
-        ImageButton canal3Button = findViewById(R.id.canal3Button);
+    private void initializeViewPager() {
+        viewPager = findViewById(R.id.viewPager);
+        adapter = new ChannelPagerAdapter(this, numPages);
+        viewPager.setAdapter(adapter);
 
-        // Configurar los botones para cargar los canales
-        canal1Button.setOnClickListener(v -> loadChannel("https://television-libre.online/html/fl/?get=Q2FuYWw0X1VSVQ=="));
-        canal2Button.setOnClickListener(v -> loadChannel("https://television-libre.online/html/fl/?get=Q2FuYWwxMlVSVQ=="));
-        canal3Button.setOnClickListener(v -> loadChannel("https://television-libre.online/html/fl/?get=Q2FuYWwxMF9VUlU="));
+        findViewById(R.id.prevPageButton).setOnClickListener(v -> {
+            int currentItem = viewPager.getCurrentItem();
+            if (currentItem > 0) {
+                viewPager.setCurrentItem(currentItem - 1);
+            }
+        });
+
+        findViewById(R.id.nextPageButton).setOnClickListener(v -> {
+            int currentItem = viewPager.getCurrentItem();
+            if (currentItem < numPages - 1) {
+                viewPager.setCurrentItem(currentItem + 1);
+            }
+        });
     }
 
-    private void loadChannel(String url) {
-        currentUrl = url; // Guardar la URL actual
-        setContentView(R.layout.activity_player); // Cambia al layout del reproductor
+    public void loadChannel(String url) {
+        currentUrl = url;
+        setContentView(R.layout.activity_player);
         webView = findViewById(R.id.webView);
 
-        // Configuraciones del WebView
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
@@ -61,11 +69,9 @@ public class MainActivity extends Activity {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
         webView.getSettings().setSupportZoom(true);
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         String newUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
         webView.getSettings().setUserAgentString(newUserAgent);
 
-        // WebViewClient para manejar navegación dentro del WebView
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -74,7 +80,6 @@ public class MainActivity extends Activity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                // Inyectar CSS para ajustar el tamaño del contenido y evitar que se desborde
                 String css = "iframe, .jwplayer, .jwplayer video { " +
                         "height: 100vh !important; " +
                         "width: 100vw !important; " +
@@ -87,27 +92,47 @@ public class MainActivity extends Activity {
                         "style.innerHTML = '" + css + "'; " +
                         "document.head.appendChild(style);";
                 webView.evaluateJavascript(javascriptCSS, null);
+
+
+                String clickScript = "function simulateClick(x, y) { " +
+                        "var event = new MouseEvent('click', { " +
+                        "clientX: x, " +
+                        "clientY: y, " +
+                        "bubbles: true, " +
+                        "cancelable: true " +
+                        "}); " +
+                        "document.elementFromPoint(x, y).dispatchEvent(event); " +
+                        "} " +
+                        "var x = window.innerWidth / 2; " +
+                        "var y = window.innerHeight / 2; " +
+                        "for (let i = 0; i < 10; i++) { " +  // Aumentar a 10 clics
+                        "setTimeout(() => simulateClick(x, y), i * 200); " +  // Reducir el tiempo a 200ms
+                        "}";
+                webView.evaluateJavascript(clickScript, null);
+
             }
         });
 
-        // WebChromeClient para manejar pantalla completa
         webView.setWebChromeClient(new WebChromeClient());
-
         webView.loadUrl(url);
-        isInWebView = true; // Marcar que estamos en el reproductor
+        isInWebView = true;
     }
 
     @Override
     public void onBackPressed() {
         if (isInWebView) {
-            showMenu(); // Si estamos en el reproductor, volver al menú
+            showMenu();
             isInWebView = false;
         } else {
-            super.onBackPressed(); // Si estamos en el menú, cerrar la app
+            super.onBackPressed();
         }
     }
 
-    // Guardar el estado actual de la actividad
+    private void showMenu() {
+        setContentView(R.layout.activity_main);
+        initializeViewPager();
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

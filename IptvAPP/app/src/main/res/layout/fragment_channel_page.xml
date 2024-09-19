@@ -1,0 +1,68 @@
+<!-- fragment_channel_page.xml -->
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="5"
+    android:rowCount="2"
+    android:padding="16dp"
+    android:background="@android:color/darker_gray"
+    android:gravity="center">
+
+    <!-- Botón con efecto de enfoque -->
+    <ImageButton
+        android:id="@+id/canal1Button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/focus_selector"
+    android:backgroundTint="@android:color/holo_blue_light"
+    android:src="@drawable/canal4"
+        android:scaleType="fitCenter"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:contentDescription="Canal 1" />
+
+    <!-- Otro botón con el mismo efecto -->
+    <ImageButton
+        android:id="@+id/canal2Button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/focus_selector"
+    android:backgroundTint="@android:color/holo_orange_light"
+    android:src="@drawable/teledoce"
+        android:scaleType="fitCenter"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:contentDescription="Canal 2" />
+
+    <!-- Tercer botón con el efecto de enfoque -->
+    <ImageButton
+        android:id="@+id/canal3Button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/focus_selector"
+    android:backgroundTint="@android:color/holo_green_light"
+    android:src="@drawable/canal10"
+        android:scaleType="fitCenter"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:contentDescription="Canal 3" />
+
+    <!-- Tercer botón con el efecto de enfoque -->
+    <ImageButton
+        android:id="@+id/canal4Button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/focus_selector"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:src="@drawable/espn"
+        android:scaleType="fitCenter"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:contentDescription="Canal 4" />
+
+    <!-- Añade más botones con el mismo estilo según sea necesario -->
+</GridLayout>
