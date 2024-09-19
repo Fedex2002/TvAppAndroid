@@ -10,7 +10,7 @@ Esta es una aplicación de Android que permite reproducir canales de televisión
 
 ## Instalación
 
-Puedes descargar la última versión de la aplicación desde la sección de [Releases](https://github.com/tuusuario/app-tv-android/releases) en GitHub. 
+Puedes descargar la última versión de la aplicación desde la sección de [Releases](https://github.com/Fedex2002/TvAppAndroid/releases) en GitHub. 
 
 1. **Descarga la versión más reciente:**
    - Ve a la página de [Releases](https://github.com/Fedex2002/TvAppAndroid/releases) y selecciona la versión que deseas instalar.
